@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wordle_neumorphism/providers/keyboard_provider.dart';
 import 'screens/MainMenu/main_menu_screen.dart';
 
 void main() {

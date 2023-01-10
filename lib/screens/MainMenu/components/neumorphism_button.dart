@@ -14,46 +14,47 @@ class NeumorphismButton extends StatefulWidget {
 class _NeumorphismButtonState extends State<NeumorphismButton> {
   bool isPressed = false;
   bool isDarkMode = true;
+
   double boxWidth = 200;
   double boxHeight = 200;
 
   double offsetX = -20;
   double offsetY = -20;
-
   double maxOffset = 20;
 
-  Color color = Colors.amber;
-  late Timer _periodicTimer;
+  Color shadowColor = Colors.amber;
 
   @override
   void initState() {
     super.initState();
-    Timer _periodicTimer =
-        Timer.periodic(Duration(milliseconds: 10), (Timer t) {
-      setState(() {
-        // offsetFirstValue += 1;
+    startShadowMovementAnimation();
+  }
 
+  void startShadowMovementAnimation() {
+    Timer.periodic(Duration(milliseconds: 10), (Timer t) {
+      setState(() {
         if (offsetX < maxOffset && offsetY <= -maxOffset) {
           //go right
           offsetX += 1;
-          color = Colors.amber;
+          shadowColor = Colors.amber;
         } else if (offsetX > 0 && offsetY < maxOffset) {
           //go down
           offsetY += 1;
-          color = Colors.green;
+          shadowColor = Colors.green;
         } else if (offsetX > -maxOffset && offsetY > 0) {
           //go left
           offsetX -= 1;
-          color = Colors.cyan;
+          shadowColor = Colors.cyan;
         } else if (offsetX < 0 && offsetY > -maxOffset) {
           //go up
           offsetY -= 1;
-          color = Colors.orange;
+          shadowColor = Colors.orange;
         }
       });
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     final backgroundColor = isDarkMode
         ? Theme.of(context).scaffoldBackgroundColor
@@ -94,13 +95,13 @@ class _NeumorphismButtonState extends State<NeumorphismButton> {
             BoxShadow(
                 blurRadius: blur,
                 offset: distance,
-                color: isDarkMode ? Color(0xFF35393F) : Colors.white,
+                color: isDarkMode ? Colors.blueGrey : Colors.white,
                 inset: isPressed),
             BoxShadow(
               blurRadius: blur,
               offset: distance,
               // color: isDarkMode ? Color(0xFF23262A) : Color(0xFFA7A9AF),
-              color: isDarkMode ? color : Color(0xFFA7A9AF),
+              color: isDarkMode ? shadowColor : Color(0xFFA7A9AF),
               inset: isPressed,
             )
           ],
