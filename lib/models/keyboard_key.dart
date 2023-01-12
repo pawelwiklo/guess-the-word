@@ -14,7 +14,8 @@ enum KeyState {
 class KeyboardKey {
   String letter;
   KeyState state;
-  MaterialColor color = Colors.blueGrey;
+  // var color = Colors.transparent;
+  var color = Color(0xFF303030);
 
   KeyboardKey({required this.letter, this.state = KeyState.idle});
 
@@ -23,12 +24,11 @@ class KeyboardKey {
     color = pickColor();
   }
 
-  MaterialColor pickColor() {
+  pickColor() {
     if (state == KeyState.idle) {
-      return Colors.blueGrey;
+      return const Color(0xFF303030);
     } else if (state == KeyState.notExistingInWord) {
-      return Colors.red;
+      return Colors.black45;
     }
-    return Colors.orange;
   }
 }

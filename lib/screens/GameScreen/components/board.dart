@@ -15,17 +15,22 @@ class Board extends StatelessWidget {
     return Column(
       children: [
         ...List.generate(
-            gameProvider.currentRowIndex + 1,
-            (rowIndex) => Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ...List.generate(
-                        board[rowIndex].length,
-                        (letterIndex) => LetterBox(
-                              letter: board[rowIndex][letterIndex],
-                            ))
-                  ],
-                ))
+            // gameProvider.currentRowIndex + 1,
+            numberOfRounds, (rowIndex) {
+          bool visible =
+              rowIndex <= gameProvider.currentRowIndex ? true : false;
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ...List.generate(
+                  board[rowIndex].length,
+                  (letterIndex) => AnimatedOpacity(
+                      opacity: visible ? 1.0 : 0.0,
+                      duration: const Duration(milliseconds: 500),
+                      child: LetterBox(letter: board[rowIndex][letterIndex])))
+            ],
+          );
+        })
       ],
     );
   }

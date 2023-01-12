@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:provider/provider.dart';
 import 'package:wordle_neumorphism/constraints.dart';
 import 'package:wordle_neumorphism/models/keyboard_key.dart';
@@ -62,16 +63,37 @@ class _KeyboardRowState extends State<KeyboardRow> {
           child: AnimatedContainer(
             duration: Duration(milliseconds: 500),
             padding: const EdgeInsets.all(defaultPadding / 2),
-            margin: const EdgeInsets.all(defaultPadding / 8),
+            margin: const EdgeInsets.all(defaultPadding / 5),
             decoration: BoxDecoration(
               color: key.color,
-              border: Border.all(),
+              // border: Border.all(),
               borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: 1,
+                    offset: const Offset(-1, -1),
+                    color: Colors.white60,
+                    inset: true),
+                BoxShadow(
+                  blurRadius: 1,
+                  offset: const Offset(1, 1),
+                  color: Colors.black54,
+                  inset: true,
+                ),
+              ],
             ),
-            child: Text(
-              key.letter,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
+            child: key.state == KeyState.idle
+                ? Text(
+                    key.letter,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  )
+                : Text(
+                    key.letter,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.white60),
+                  ),
           ),
         );
       },

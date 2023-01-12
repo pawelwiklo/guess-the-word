@@ -11,11 +11,13 @@ class Letter {
   String value;
   LetterState state;
   MaterialColor color;
+  bool isAnimationRunning;
 
   Letter(
       {required this.value,
       this.state = LetterState.idle,
-      this.color = Colors.grey});
+      this.color = Colors.grey,
+      this.isAnimationRunning = false});
 
   getColor() {
     if (state == LetterState.correct) {
