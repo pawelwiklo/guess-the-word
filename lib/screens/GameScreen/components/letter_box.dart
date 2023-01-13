@@ -6,7 +6,7 @@ import 'package:wordle_neumorphism/constraints.dart';
 import 'package:wordle_neumorphism/models/letter.dart';
 
 class LetterBox extends StatefulWidget {
-  LetterBox({Key? key, required this.letter}) : super(key: key);
+  const LetterBox({Key? key, required this.letter}) : super(key: key);
 
   final Letter letter;
 
@@ -80,7 +80,7 @@ class _LetterBoxState extends State<LetterBox> {
         ],
       ),
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 400),
         margin: const EdgeInsets.all(defaultPadding / 2),
         height: boxSize,
         width: boxSize,

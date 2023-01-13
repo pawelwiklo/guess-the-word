@@ -24,11 +24,12 @@ class GameScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
-                  if (MediaQuery.of(context).size.height > 650) HeaderText(),
-                  RoundCounter(),
-                  Board(),
-                  Spacer(),
-                  Keyboard(),
+                  if (MediaQuery.of(context).size.height > 650)
+                    const HeaderText(),
+                  const RoundCounter(),
+                  const Board(),
+                  const Spacer(),
+                  const Keyboard(),
                 ],
               ),
             ),

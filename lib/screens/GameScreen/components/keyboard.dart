@@ -19,7 +19,7 @@ class Keyboard extends StatelessWidget {
         KeyboardRow(keys: keys[0]),
         KeyboardRow(keys: keys[1]),
         KeyboardRow(keys: keys[2]),
-        SizedBox(height: defaultPadding),
+        const SizedBox(height: defaultPadding),
       ],
     );
   }
@@ -73,15 +73,15 @@ class _KeyboardRowState extends State<KeyboardRow> {
               color: key.color,
               // border: Border.all(),
               borderRadius: BorderRadius.circular(10),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                     blurRadius: 1,
-                    offset: const Offset(-1, -1),
+                    offset: Offset(-1, -1),
                     color: Colors.white60,
                     inset: true),
                 BoxShadow(
                   blurRadius: 1,
-                  offset: const Offset(1, 1),
+                  offset: Offset(1, 1),
                   color: Colors.black54,
                   inset: true,
                 ),
@@ -90,11 +90,12 @@ class _KeyboardRowState extends State<KeyboardRow> {
             child: key.state == KeyState.idle
                 ? Text(
                     key.letter,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
                   )
                 : Text(
                     key.letter,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         color: Colors.white60),

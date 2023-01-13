@@ -10,7 +10,7 @@ class MainMenuScreen extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: const <Widget>[
             NeumorphismButton(),
           ],
         ),

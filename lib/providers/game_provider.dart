@@ -10,9 +10,9 @@ const int numberOfRounds = 5;
 const int wordLength = 5;
 
 enum GameState {
-  Running,
-  Win,
-  Lost,
+  running,
+  win,
+  lost,
 }
 
 class GameProvider extends ChangeNotifier {
@@ -23,7 +23,7 @@ class GameProvider extends ChangeNotifier {
 
   int _currentRowIndex = 0;
   int get currentRowIndex => _currentRowIndex;
-  GameState gameState = GameState.Running;
+  GameState gameState = GameState.running;
 
   void handleInput(
       {required String letter,
@@ -38,10 +38,10 @@ class GameProvider extends ChangeNotifier {
       if (canAddLetter()) return;
       submitWord(handler: handler.setStateForLetter);
       checkWin();
-      if (gameState == GameState.Running) {
+      if (gameState == GameState.running) {
         addNextRow(ctx);
       }
-      if (gameState != GameState.Running) {
+      if (gameState != GameState.running) {
         handler.resetKeyboard();
         gameOverDialog(
             ctx: ctx,
@@ -100,7 +100,7 @@ class GameProvider extends ChangeNotifier {
     if (canAddNextRow) {
       _currentRowIndex++;
     } else {
-      gameState = GameState.Lost;
+      gameState = GameState.lost;
     }
     notifyListeners();
   }
@@ -115,14 +115,14 @@ class GameProvider extends ChangeNotifier {
 
   void checkWin() {
     if (word == board[currentRowIndex].map((e) => e.value).toList().join()) {
-      gameState = GameState.Win;
+      gameState = GameState.win;
     }
   }
 
   void resetGame() {
     _board = initBoard();
     _currentRowIndex = 0;
-    gameState = GameState.Running;
+    gameState = GameState.running;
     word = words[Random().nextInt(words.length)].toUpperCase();
     notifyListeners();
   }
