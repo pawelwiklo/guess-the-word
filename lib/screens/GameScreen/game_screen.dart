@@ -19,15 +19,18 @@ class GameScreen extends StatelessWidget {
       ],
       child: SafeArea(
         child: Scaffold(
-          body: Center(
-            child: Column(
-              children: [
-                HeaderText(),
-                RoundCounter(),
-                Board(),
-                Spacer(),
-                Keyboard(),
-              ],
+          body: SingleChildScrollView(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  if (MediaQuery.of(context).size.height > 650) HeaderText(),
+                  RoundCounter(),
+                  Board(),
+                  Spacer(),
+                  Keyboard(),
+                ],
+              ),
             ),
           ),
         ),

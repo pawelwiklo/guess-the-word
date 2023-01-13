@@ -10,6 +10,11 @@ class KeyboardProvider extends ChangeNotifier {
         keys.expand((i) => i).toList().where((e) => e.letter == letter).first;
     kk.setKeyState(KeyState.notExistingInWord);
   }
+
+  resetKeyboard() {
+    _keys = initKeyboard();
+    notifyListeners();
+  }
 }
 
 List<List<KeyboardKey>> initKeyboard() {

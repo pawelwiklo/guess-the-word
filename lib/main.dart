@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wordle_neumorphism/providers/keyboard_provider.dart';
+import 'package:wordle_neumorphism/screens/GameScreen/game_screen.dart';
 import 'screens/MainMenu/main_menu_screen.dart';
 
 void main() {
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
             .apply(bodyColor: Colors.white),
       ),
-      home: MainMenuScreen(),
+      // home: MainMenuScreen(),
+      home: GameScreen(),
     );
   }
 }

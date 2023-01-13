@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:wordle_neumorphism/models/letter.dart';
+import 'package:wordle_neumorphism/providers/keyboard_provider.dart';
+import 'package:wordle_neumorphism/screens/GameScreen/components/game_over_dialog.dart';
 
 const int numberOfRounds = 5;
 const int wordLength = 5;
+
+enum GameState {
+  Running,
+  Win,
+  Lost,
+}
 
 class GameProvider extends ChangeNotifier {
   String TEST_WORD = 'APPLE';
@@ -12,8 +20,12 @@ class GameProvider extends ChangeNotifier {
 
   int _currentRowIndex = 0;
   int get currentRowIndex => _currentRowIndex;
+  GameState gameState = GameState.Running;
 
-  void handleInput({required String letter, required Function handler}) {
+  void handleInput(
+      {required String letter,
+      required KeyboardProvider handler,
+      required BuildContext ctx}) {
     if (letter == 'DEL') {
       removeLastLetter();
       notifyListeners();
@@ -21,8 +33,19 @@ class GameProvider extends ChangeNotifier {
     }
     if (letter == 'ENTER') {
       if (canAddLetter()) return;
-      submitWord(handler: handler);
-      addNextRow();
+      submitWord(handler: handler.setStateForLetter);
+      checkWin();
+      if (gameState == GameState.Running) {
+        addNextRow(ctx);
+      }
+      if (gameState != GameState.Running) {
+        handler.resetKeyboard();
+        gameOverDialog(
+            ctx: ctx,
+            gameState: gameState,
+            word: TEST_WORD,
+            resetGameHandler: resetGame);
+      }
       return;
     }
     if (canAddLetter()) {
@@ -69,10 +92,12 @@ class GameProvider extends ChangeNotifier {
     }
   }
 
-  void addNextRow() {
+  void addNextRow(BuildContext ctx) {
     bool canAddNextRow = _currentRowIndex != (numberOfRounds - 1);
     if (canAddNextRow) {
       _currentRowIndex++;
+    } else {
+      gameState = GameState.Lost;
     }
     notifyListeners();
   }
@@ -83,6 +108,20 @@ class GameProvider extends ChangeNotifier {
 
   bool isInWrongPosition(String letter) {
     return TEST_WORD.contains(letter);
+  }
+
+  void checkWin() {
+    if (TEST_WORD ==
+        board[currentRowIndex].map((e) => e.value).toList().join()) {
+      gameState = GameState.Win;
+    }
+  }
+
+  void resetGame() {
+    _board = initBoard();
+    _currentRowIndex = 0;
+    gameState = GameState.Running;
+    notifyListeners();
   }
 }
 

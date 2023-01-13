@@ -20,7 +20,9 @@ class Board extends StatelessWidget {
           bool visible =
               rowIndex <= gameProvider.currentRowIndex ? true : false;
           return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ...List.generate(
                   board[rowIndex].length,

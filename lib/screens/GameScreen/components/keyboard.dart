@@ -19,6 +19,7 @@ class Keyboard extends StatelessWidget {
         KeyboardRow(keys: keys[0]),
         KeyboardRow(keys: keys[1]),
         KeyboardRow(keys: keys[2]),
+        SizedBox(height: defaultPadding),
       ],
     );
   }
@@ -50,6 +51,11 @@ class _KeyboardRowState extends State<KeyboardRow> {
   List<GestureDetector> buildKeyboardRow(BuildContext context) {
     GameProvider gameProvider = Provider.of<GameProvider>(context);
     KeyboardProvider keyboardProvider = Provider.of<KeyboardProvider>(context);
+
+    double screenWidth = MediaQuery.of(context).size.width;
+    EdgeInsets padding =
+        EdgeInsets.all(defaultPadding / getDividerValue(screenWidth));
+
     return List.generate(
       widget.keys.length,
       (index) {
@@ -57,12 +63,11 @@ class _KeyboardRowState extends State<KeyboardRow> {
         return GestureDetector(
           onTap: () {
             gameProvider.handleInput(
-                letter: key.letter,
-                handler: keyboardProvider.setStateForLetter);
+                letter: key.letter, handler: keyboardProvider, ctx: context);
           },
           child: AnimatedContainer(
             duration: Duration(milliseconds: 500),
-            padding: const EdgeInsets.all(defaultPadding / 2),
+            padding: padding,
             margin: const EdgeInsets.all(defaultPadding / 5),
             decoration: BoxDecoration(
               color: key.color,
@@ -98,5 +103,15 @@ class _KeyboardRowState extends State<KeyboardRow> {
         );
       },
     );
+  }
+
+  double getDividerValue(double screenWidth) {
+    double divider = 1;
+    if (screenWidth <= 500 && screenWidth > 320) {
+      divider = 2;
+    } else if (screenWidth <= 320) {
+      divider = 5;
+    }
+    return divider;
   }
 }

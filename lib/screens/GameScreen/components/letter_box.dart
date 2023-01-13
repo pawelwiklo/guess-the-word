@@ -16,8 +16,8 @@ class LetterBox extends StatefulWidget {
 
 class _LetterBoxState extends State<LetterBox> {
   bool isPressed = true;
-  double boxWidth = 50;
-  double boxHeight = 50;
+  // double boxWidth = 50;
+  // double boxHeight = 50;
   double offsetX = -2;
   double offsetY = -2;
   double maxOffset = 5;
@@ -62,6 +62,11 @@ class _LetterBoxState extends State<LetterBox> {
     Offset distance = Offset(offsetX, offsetY);
     double blur = isPressed ? 1.0 : 5.0;
 
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    double suggestedBoxSize = screenWidth / 7;
+    double boxSize = suggestedBoxSize > 90 ? 90 : suggestedBoxSize;
+
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
@@ -77,8 +82,8 @@ class _LetterBoxState extends State<LetterBox> {
       child: AnimatedContainer(
         duration: Duration(milliseconds: 400),
         margin: const EdgeInsets.all(defaultPadding / 2),
-        height: boxHeight,
-        width: boxWidth,
+        height: boxSize,
+        width: boxSize,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: backgroundColor,
