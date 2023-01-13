@@ -66,7 +66,7 @@ class _KeyboardRowState extends State<KeyboardRow> {
                 letter: key.letter, handler: keyboardProvider, ctx: context);
           },
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 500),
+            duration: defaultDuration,
             padding: padding,
             margin: const EdgeInsets.all(defaultPadding / 5),
             decoration: BoxDecoration(
@@ -108,7 +108,7 @@ class _KeyboardRowState extends State<KeyboardRow> {
   double getDividerValue(double screenWidth) {
     double divider = 1;
     if (screenWidth <= 500 && screenWidth > 320) {
-      divider = 2;
+      divider = 2.2;
     } else if (screenWidth <= 320) {
       divider = 5;
     }

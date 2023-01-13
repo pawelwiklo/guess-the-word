@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:wordle_neumorphism/constraints.dart';
 import 'package:wordle_neumorphism/screens/GameScreen/game_screen.dart';
 
 class NeumorphismButton extends StatefulWidget {
@@ -31,7 +32,7 @@ class _NeumorphismButtonState extends State<NeumorphismButton> {
   }
 
   void startShadowMovementAnimation() {
-    Timer.periodic(Duration(milliseconds: 10), (Timer t) {
+    Timer.periodic(const Duration(milliseconds: 10), (Timer t) {
       setState(() {
         if (offsetX < maxOffset && offsetY <= -maxOffset) {
           //go right
@@ -73,11 +74,11 @@ class _NeumorphismButtonState extends State<NeumorphismButton> {
               boxHeight = MediaQuery.of(context).size.height;
             });
             Future.delayed(
-              Duration(milliseconds: 400),
+              const Duration(milliseconds: 400),
               () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => GameScreen()),
+                  MaterialPageRoute(builder: (context) => const GameScreen()),
                 );
               },
             );
@@ -87,7 +88,7 @@ class _NeumorphismButtonState extends State<NeumorphismButton> {
       child: AnimatedContainer(
         height: boxHeight,
         width: boxWidth,
-        duration: const Duration(milliseconds: 500),
+        duration: defaultDuration,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           color: backgroundColor,
@@ -95,13 +96,12 @@ class _NeumorphismButtonState extends State<NeumorphismButton> {
             BoxShadow(
                 blurRadius: blur,
                 offset: distance,
-                color: isDarkMode ? Colors.blueGrey : Colors.white,
+                color: Colors.blueGrey,
                 inset: isPressed),
             BoxShadow(
               blurRadius: blur,
               offset: distance,
-              // color: isDarkMode ? Color(0xFF23262A) : Color(0xFFA7A9AF),
-              color: isDarkMode ? shadowColor : Color(0xFFA7A9AF),
+              color: shadowColor,
               inset: isPressed,
             )
           ],
@@ -110,7 +110,7 @@ class _NeumorphismButtonState extends State<NeumorphismButton> {
           child: Center(
             child: Text(
               isPressed ? '' : 'New Game',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
             ),
           ),
         ),

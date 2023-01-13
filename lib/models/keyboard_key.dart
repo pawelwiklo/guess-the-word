@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wordle_neumorphism/constraints.dart';
 
 List<List<String>> keyboardLetters = [
   ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -14,8 +15,7 @@ enum KeyState {
 class KeyboardKey {
   String letter;
   KeyState state;
-  // var color = Colors.transparent;
-  var color = Color(0xFF303030);
+  var color = keyboardBg;
 
   KeyboardKey({required this.letter, this.state = KeyState.idle});
 
@@ -26,7 +26,7 @@ class KeyboardKey {
 
   pickColor() {
     if (state == KeyState.idle) {
-      return const Color(0xFF303030);
+      return keyboardBg;
     } else if (state == KeyState.notExistingInWord) {
       return Colors.black45;
     }

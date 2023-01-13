@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 const bgColor = Color(0xFF212332);
-// const bgColor = Color(0xFF2E3239);
+const keyboardBg = Color(0xFF303030);
 const primaryColor = Color(0xFF2A2D3E);
 const incorrectLetterColor = Color(0xFF6a6d7e);
 
-const correctBoxColor = Color(0xFF219332);
-const incorrectBoxColor = Colors.deepOrange;
-const wrongLetterPositionColor = Colors.amber;
+const correctBoxColor = Colors.green;
+const incorrectBoxColor = Colors.red;
+const wrongLetterPositionColor = Colors.yellow;
+const defaultBoxBgColor = Colors.grey;
 
 const double defaultPadding = 16.0;
 const double defaultBorderRadius = 10.0;

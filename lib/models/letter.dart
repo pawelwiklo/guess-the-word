@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wordle_neumorphism/constraints.dart';
 
 enum LetterState {
   idle,
@@ -21,12 +22,12 @@ class Letter {
 
   getColor() {
     if (state == LetterState.correct) {
-      return Colors.green;
+      return correctBoxColor;
     } else if (state == LetterState.inWord) {
-      return Colors.yellow;
+      return wrongLetterPositionColor;
     } else if (state == LetterState.incorrect) {
-      return Colors.red;
+      return incorrectBoxColor;
     }
-    return Colors.grey;
+    return defaultBoxBgColor;
   }
 }

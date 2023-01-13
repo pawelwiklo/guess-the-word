@@ -34,12 +34,6 @@ Future gameOverDialog(
             ),
           ),
           actions: [
-            // MaterialButton(
-            //     child: Text("Restart"),
-            //     onPressed: () {
-            //       resetGameHandler();
-            //       Navigator.pop(context);
-            //     }),
             GestureDetector(
               onTap: () {
                 resetGameHandler();

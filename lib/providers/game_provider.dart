@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:wordle_neumorphism/models/letter.dart';
+import 'package:wordle_neumorphism/models/words.dart';
 import 'package:wordle_neumorphism/providers/keyboard_provider.dart';
 import 'package:wordle_neumorphism/screens/GameScreen/components/game_over_dialog.dart';
 
@@ -13,7 +16,7 @@ enum GameState {
 }
 
 class GameProvider extends ChangeNotifier {
-  String TEST_WORD = 'APPLE';
+  String word = words[Random().nextInt(words.length)].toUpperCase();
 
   List<List<Letter>> _board = initBoard();
   List<List<Letter>> get board => _board;
@@ -43,7 +46,7 @@ class GameProvider extends ChangeNotifier {
         gameOverDialog(
             ctx: ctx,
             gameState: gameState,
-            word: TEST_WORD,
+            word: word,
             resetGameHandler: resetGame);
       }
       return;
@@ -103,16 +106,15 @@ class GameProvider extends ChangeNotifier {
   }
 
   bool isCorrect(int index, String letter) {
-    return TEST_WORD[index] == letter;
+    return word[index] == letter;
   }
 
   bool isInWrongPosition(String letter) {
-    return TEST_WORD.contains(letter);
+    return word.contains(letter);
   }
 
   void checkWin() {
-    if (TEST_WORD ==
-        board[currentRowIndex].map((e) => e.value).toList().join()) {
+    if (word == board[currentRowIndex].map((e) => e.value).toList().join()) {
       gameState = GameState.Win;
     }
   }
@@ -121,6 +123,7 @@ class GameProvider extends ChangeNotifier {
     _board = initBoard();
     _currentRowIndex = 0;
     gameState = GameState.Running;
+    word = words[Random().nextInt(words.length)].toUpperCase();
     notifyListeners();
   }
 }

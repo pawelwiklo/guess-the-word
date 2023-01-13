@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wordle_neumorphism/models/letter.dart';
 import 'package:wordle_neumorphism/providers/game_provider.dart';
 import 'package:wordle_neumorphism/screens/GameScreen/components/letter_box.dart';
+import 'package:wordle_neumorphism/constraints.dart';
 
 class Board extends StatelessWidget {
   const Board({Key? key}) : super(key: key);
@@ -14,13 +15,10 @@ class Board extends StatelessWidget {
 
     return Column(
       children: [
-        ...List.generate(
-            // gameProvider.currentRowIndex + 1,
-            numberOfRounds, (rowIndex) {
+        ...List.generate(numberOfRounds, (rowIndex) {
           bool visible =
               rowIndex <= gameProvider.currentRowIndex ? true : false;
           return Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -28,7 +26,7 @@ class Board extends StatelessWidget {
                   board[rowIndex].length,
                   (letterIndex) => AnimatedOpacity(
                       opacity: visible ? 1.0 : 0.0,
-                      duration: const Duration(milliseconds: 500),
+                      duration: defaultDuration,
                       child: LetterBox(letter: board[rowIndex][letterIndex])))
             ],
           );
