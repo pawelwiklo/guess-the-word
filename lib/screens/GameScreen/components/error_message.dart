@@ -10,11 +10,12 @@ class ErrorMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     GameProvider gameProvider = Provider.of<GameProvider>(context);
     bool visible = gameProvider.wordNotInDictionary;
+    double expectedSize = MediaQuery.of(context).size.width / 3;
     return AnimatedOpacity(
       opacity: visible ? 1.0 : 0.0,
       duration: defaultDuration,
       child: Container(
-        width: MediaQuery.of(context).size.width / 1.4,
+        width: expectedSize < 300 ? 300 : expectedSize,
         margin: const EdgeInsets.all(defaultPadding),
         padding: const EdgeInsets.all(defaultPadding),
         decoration: BoxDecoration(
