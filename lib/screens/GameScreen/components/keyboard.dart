@@ -19,8 +19,6 @@ class Keyboard extends StatelessWidget {
         KeyboardRow(keys: keys[0]),
         KeyboardRow(keys: keys[1]),
         KeyboardRow(keys: keys[2]),
-        KeyboardRow(keys: keys[3]),
-        // const SizedBox(height: defaultPadding),
       ],
     );
   }
