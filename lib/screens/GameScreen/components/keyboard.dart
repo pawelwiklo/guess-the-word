@@ -108,7 +108,7 @@ class _KeyboardRowState extends State<KeyboardRow> {
   double getDividerValue(double screenWidth) {
     double divider = 1;
     if (screenWidth <= 500 && screenWidth > 320) {
-      divider = 2;
+      divider = 2.4;
     } else if (screenWidth <= 320) {
       divider = 4;
     }
