@@ -14,8 +14,9 @@ class ErrorMessage extends StatelessWidget {
       opacity: visible ? 1.0 : 0.0,
       duration: defaultDuration,
       child: Container(
-        margin: const EdgeInsets.all(defaultPadding / 2),
-        padding: const EdgeInsets.all(defaultPadding * 2),
+        width: MediaQuery.of(context).size.width / 1.4,
+        margin: const EdgeInsets.all(defaultPadding),
+        padding: const EdgeInsets.all(defaultPadding),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Theme.of(context).scaffoldBackgroundColor,
@@ -32,8 +33,8 @@ class ErrorMessage extends StatelessWidget {
             ),
           ],
         ),
-        child: const SizedBox(
-          child: Center(
+        child: const Center(
+          child: FittedBox(
             child: Text(
               "Word not in dictionary",
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.w400),

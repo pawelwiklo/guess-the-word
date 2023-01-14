@@ -40,7 +40,7 @@ class GameProvider extends ChangeNotifier {
       notifyListeners();
       return;
     }
-    if (letter == 'ENTER') {
+    if (letter == '✓') {
       if (canAddLetter()) return;
       if (!isWord()) {
         wordNotInDictionary = true;
