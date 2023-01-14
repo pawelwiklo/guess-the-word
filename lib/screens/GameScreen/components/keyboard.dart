@@ -19,7 +19,8 @@ class Keyboard extends StatelessWidget {
         KeyboardRow(keys: keys[0]),
         KeyboardRow(keys: keys[1]),
         KeyboardRow(keys: keys[2]),
-        const SizedBox(height: defaultPadding),
+        KeyboardRow(keys: keys[3]),
+        // const SizedBox(height: defaultPadding),
       ],
     );
   }
@@ -68,7 +69,7 @@ class _KeyboardRowState extends State<KeyboardRow> {
           child: AnimatedContainer(
             duration: defaultDuration,
             padding: padding,
-            margin: const EdgeInsets.all(defaultPadding / 5),
+            margin: const EdgeInsets.all(defaultPadding / 4),
             decoration: BoxDecoration(
               color: key.color,
               // border: Border.all(),
@@ -109,9 +110,9 @@ class _KeyboardRowState extends State<KeyboardRow> {
   double getDividerValue(double screenWidth) {
     double divider = 1;
     if (screenWidth <= 500 && screenWidth > 320) {
-      divider = 2.2;
+      divider = 2;
     } else if (screenWidth <= 320) {
-      divider = 5;
+      divider = 4;
     }
     return divider;
   }

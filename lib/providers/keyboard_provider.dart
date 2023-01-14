@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wordle_neumorphism/constraints.dart';
 import 'package:wordle_neumorphism/models/keyboard_key.dart';
 
 class KeyboardProvider extends ChangeNotifier {
@@ -8,6 +9,16 @@ class KeyboardProvider extends ChangeNotifier {
   void setStateForLetter(String letter) {
     KeyboardKey kk =
         keys.expand((i) => i).toList().where((e) => e.letter == letter).first;
+
+    if (kk.letter == 'DEL') {
+      if (kk.color != Colors.orange) {
+        kk.color = Colors.orange;
+        return;
+      } else {
+        kk.color = keyboardBg;
+        return;
+      }
+    }
     kk.setKeyState(KeyState.notExistingInWord);
   }
 

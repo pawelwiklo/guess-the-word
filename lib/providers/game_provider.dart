@@ -25,17 +25,29 @@ class GameProvider extends ChangeNotifier {
   int get currentRowIndex => _currentRowIndex;
   GameState gameState = GameState.running;
 
+  bool wordNotInDictionary = false;
+
   void handleInput(
       {required String letter,
       required KeyboardProvider handler,
       required BuildContext ctx}) {
     if (letter == 'DEL') {
+      if (board[currentRowIndex][wordLength - 1].value != '') {
+        handler.setStateForLetter('DEL');
+      }
       removeLastLetter();
+      wordNotInDictionary = false;
       notifyListeners();
       return;
     }
     if (letter == 'ENTER') {
       if (canAddLetter()) return;
+      if (!isWord()) {
+        wordNotInDictionary = true;
+        handler.setStateForLetter('DEL');
+        notifyListeners();
+        return;
+      }
       submitWord(handler: handler.setStateForLetter);
       checkWin();
       if (gameState == GameState.running) {
@@ -93,6 +105,12 @@ class GameProvider extends ChangeNotifier {
         handler(letter.value);
       }
     }
+  }
+
+  bool isWord() {
+    String userInput =
+        board[currentRowIndex].map((e) => e.value).toList().join();
+    return words.contains(userInput.toLowerCase());
   }
 
   void addNextRow(BuildContext ctx) {
